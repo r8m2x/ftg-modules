@@ -54,7 +54,6 @@ ID: {user.id}
 Удален: {user.deleted}
 Бот: {user.bot}
 
-Видео на аве: {user.photo.has_video}
 DC ID: {user.photo.dc_id}
 
 Общих чатов: {u.common_chats_count}
