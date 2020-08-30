@@ -39,7 +39,7 @@ class AnimationMod(loader.Module):
         for _ in range(int(text)):
             for item in list("🌑🌘🌗🌖🌕🌔🌓🌒"):
                 await message.edit(item)
-                await asyncio.sleep(3)
+                await asyncio.sleep(8)
     
     @loader.unrestricted
     async def clockscmd(self, message):
@@ -51,7 +51,7 @@ class AnimationMod(loader.Module):
         for _ in range(int(text)):
             for item in list("🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛"):
                 await message.edit(item)
-                asyncio.sleep(3)
+                await asyncio.sleep(8)
     
     @loader.unrestricted
     async def earthcmd(self, message):
@@ -63,7 +63,7 @@ class AnimationMod(loader.Module):
         for _ in range(int(text)):
             for item in list("🌎🌍🌏"):
                 await message.edit(item)
-                asyncio.sleep(3)
+                await asyncio.sleep(8)
 
     @loader.unrestricted
     async def suncmd(self, message):
@@ -75,4 +75,4 @@ class AnimationMod(loader.Module):
         for _ in range(int(text)):
             for item in list("☀️🌤⛅️🌥☁️🌥⛅️🌤☀️"):
                 await message.edit(item)
-                asyncio.sleep(3)
+                await asyncio.sleep(8)
