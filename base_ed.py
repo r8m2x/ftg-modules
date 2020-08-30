@@ -27,8 +27,8 @@ class Base64Mod(loader.Module):
     """Encode/decode base(16|32|64|85). NOT ENCRYPTING FILES!"""
     strings = {
         "name": "base64",
-        "no_text_e": "<code>Provide text to encode.</code>",
-        "no_text_d": "<code>Provide text to decode.</code>"
+        "no_text_e": "<code>Вы не ввели текст для кодирования.</code>",
+        "no_text_d": "<code>Вы не ввели текст для декодирования.</code>"
     }
     
     
@@ -48,7 +48,7 @@ class Base64Mod(loader.Module):
             decoded = bytes.decode(dec_bytes)
             await message.edit(decoded)
         except:
-            await message.edit("<code>Invalid encoded text</code>")
+            await message.edit("<code>Я не могу декодировать это.</code>")
     
     @loader.owner
     async def b85ecmd(self, message):
@@ -65,7 +65,7 @@ class Base64Mod(loader.Module):
             encoded = bytes.decode(enc_bytes)
             await message.edit(encoded)
         except:
-            await message.edit("<code>Error</code>")
+            await message.edit("<code>Ошибка!</code>")
     
     @loader.owner
     async def b64dcmd(self, message):
@@ -82,7 +82,7 @@ class Base64Mod(loader.Module):
             decoded = bytes.decode(dec_bytes)
             await message.edit(decoded)
         except:
-            await message.edit("<code>Invalid encoded text</code>")
+            await message.edit("<code>Я не могу декодировать это.</code>")
 
     @loader.owner
     async def b64ecmd(self, message):
@@ -99,7 +99,7 @@ class Base64Mod(loader.Module):
             encoded = bytes.decode(enc_bytes)
             await message.edit(encoded)
         except:
-            await message.edit("<code>Error</code>")
+            await message.edit("<code>Ошибка!</code>")
         
     @loader.owner
     async def b32dcmd(self, message):
@@ -116,7 +116,7 @@ class Base64Mod(loader.Module):
             decoded = bytes.decode(dec_bytes)
             await message.edit(decoded)
         except:
-            await message.edit("<code>Invalid encoded text</code>")
+            await message.edit("<code>Я не могу декодировать это.</code>")
 
     @loader.owner
     async def b32ecmd(self, message):
@@ -133,7 +133,7 @@ class Base64Mod(loader.Module):
             encoded = bytes.decode(enc_bytes)
             await message.edit(encoded)
         except:
-            await message.edit("<code>Error</code>")
+            await message.edit("<code>Ошибка!</code>")
         
     @loader.owner
     async def b16dcmd(self, message):
@@ -151,7 +151,7 @@ class Base64Mod(loader.Module):
             decoded = bytes.decode(dec_bytes)
             await message.edit(decoded)
         except:
-            await message.edit("<code>Invalid encoded text</code>")
+            await message.edit("<code>Я не могу декодировать это.</code>")
     
     @loader.owner
     async def b16ecmd(self, message):
@@ -168,4 +168,4 @@ class Base64Mod(loader.Module):
             encoded = bytes.decode(enc_bytes)
             await message.edit(encoded)
         except:
-            await message.edit("<code>Error</code>")
+            await message.edit("<code>Ошибка!</code>")
