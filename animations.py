@@ -52,27 +52,3 @@ class AnimationMod(loader.Module):
             for item in list("🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛"):
                 await message.edit(item)
                 await asyncio.sleep(15)
-    
-    @loader.unrestricted
-    async def earthcmd(self, message):
-        """.earth [сколько раз повторять - дефолт 5 раз]"""
-        text = utils.get_args_raw(message)
-        if not text.isdigit():
-            text = 5
-
-        for _ in range(int(text)):
-            for item in list("🌎🌍🌏"):
-                await message.edit(item)
-                await asyncio.sleep(15)
-
-    @loader.unrestricted
-    async def suncmd(self, message):
-        """.sun [сколько раз повторять - дефолт 5 раз]"""
-        text = utils.get_args_raw(message)
-        if not text.isdigit():
-            text = 5
-
-        for _ in range(int(text)):
-            for item in list("☀️🌤⛅️🌥☁️🌥⛅️🌤☀️"):
-                await message.edit(item)
-                await asyncio.sleep(15)
