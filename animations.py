@@ -39,7 +39,7 @@ class AnimationMod(loader.Module):
         for _ in range(int(text)):
             for item in list("🌑🌘🌗🌖🌕🌔🌓🌒"):
                 await message.edit(item)
-                await asyncio.sleep(15)
+                await asyncio.sleep(5)
     
     @loader.unrestricted
     async def clockscmd(self, message):
@@ -51,4 +51,4 @@ class AnimationMod(loader.Module):
         for _ in range(int(text)):
             for item in list("🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛"):
                 await message.edit(item)
-                await asyncio.sleep(15)
+                await asyncio.sleep(5)
