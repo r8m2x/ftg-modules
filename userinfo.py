@@ -40,10 +40,10 @@ class UserInfoMod(loader.Module):
             n = message
         u = await self.client(functions.users.GetFullUserRequest(n.from_id))
         user = u.user
-        await message.respond(f"""
+        await message.edit(f"""
 
 ID: {user.id}
-Юзерка: {user.username}
+Юзернейм: {user.username}
 
 Цвет ника: {getColor(user.id)}
 Имя: {user.first_name}
@@ -59,8 +59,7 @@ DC ID: {user.photo.dc_id}
 Общих чатов: {u.common_chats_count}
 Перманентная ссылка: <a href="tg://user?id={n.from_id}">тык</a>
 
-""", reply_to=await message.get_reply_message())
-        await message.delete()
+""")
     
 def getColor(id) -> str:
  colors = ["#FB6169", "#85DE85",
