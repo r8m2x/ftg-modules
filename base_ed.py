@@ -31,141 +31,116 @@ class Base64Mod(loader.Module):
         "no_text_d": "<code>Вы не ввели текст для декодирования.</code>"
     }
     
+    @loader.sudo
+    async def b16ecmd(self,m):
+        """.b16e [reply or text]"""
+        try:
+            text = utils.get_args_raw(m)
+            reply = await m.get_reply_message()
+            if not text:
+                if reply:
+                    text = reply.raw_text
+                else:
+                    return await utils.answer(m, self.strings(no_text_e, m))
+            await m.edit(base64.b16encode(text.encode()).decode())
+        except:
+            await m.edit("<code>Я не могу закодировать это</code>")
+    @loader.sudo
+    async def b32ecmd(self,m):
+        """.b32e [reply or text]"""
+        try:
+            text = utils.get_args_raw(m)
+            reply = await m.get_reply_message()
+            if not text:
+                if reply:
+                    text = reply.raw_text
+                else:
+                    return await utils.answer(m, self.strings(no_text_e, m))
+            await m.edit(base64.b32encode(text.encode()).decode())
+        except:
+            await m.edit("<code>Я не могу закодировать это</code>")
+    @loader.sudo
+    async def b64ecmd(self,m):
+        """.b64e [reply or text]"""
+        try:
+            text = utils.get_args_raw(m)
+            reply = await m.get_reply_message()
+            if not text:
+                if reply:
+                    text = reply.raw_text
+                else:
+                    return await utils.answer(m, self.strings(no_text_e, m))
+            await m.edit(base64.b64encode(text.encode()).decode())
+        except:
+            await m.edit("<code>Я не могу закодировать это</code>")
+    @loader.sudo
+    async def b85ecmd(self,m):
+        """.b85e [reply or text]"""
+        try:
+            text = utils.get_args_raw(m)
+            reply = await m.get_reply_message()
+            if not text:
+                if reply:
+                    text = reply.raw_text
+                else:
+                    return await utils.answer(m, self.strings(no_text_e, m))
+            await m.edit(base64.b85encode(text.encode()).decode())
+        except:
+            await m.edit("<code>Я не могу закодировать это</code>")
     
-    @loader.owner
-    
-    async def b85dcmd(self, message):
-        """.b85d {encoded text} - decode base85"""
-        text = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not text and reply:
-        	text = reply.raw_text
-        if not text and not reply:
-        	return await utils.answer(message, self.strings("no_text_d", message))
+    @loader.sudo
+    async def b16dcmd(self,m):
+        """.b16d [reply or text]"""
         try:
-            enc_bytes = bytes(text, "utf-8")
-            dec_bytes = base64.b85decode(enc_bytes)
-            decoded = bytes.decode(dec_bytes)
-            await message.edit(decoded)
+            text = utils.get_args_raw(m)
+            reply = await m.get_reply_message()
+            if not text:
+                if reply:
+                    text = reply.raw_text
+                else:
+                    return await utils.answer(m, self.strings(no_text_e, m))
+            await m.edit(base64.b16decode(text.encode()).decode())
         except:
-            await message.edit("<code>Я не могу декодировать это.</code>")
-    
-    @loader.owner
-    async def b85ecmd(self, message):
-        """.b85e {text} - encode to base85"""
-        text = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not text and reply:
-        	text = reply.raw_text
-        if not text and not reply:
-        	return await utils.answer(message, self.strings("no_text_e", message))
+            await m.edit("<code>Я не могу декодировать это</code>")
+    @loader.sudo
+    async def b32dcmd(self,m):
+        """.b32d [reply or text]"""
         try:
-            dec_bytes = bytes(text, "utf-8")
-            enc_bytes = base64.b85encode(dec_bytes)
-            encoded = bytes.decode(enc_bytes)
-            await message.edit(encoded)
+            text = utils.get_args_raw(m)
+            reply = await m.get_reply_message()
+            if not text:
+                if reply:
+                    text = reply.raw_text
+                else:
+                    return await utils.answer(m, self.strings(no_text_e, m))
+            await m.edit(base64.b32decode(text.encode()).decode())
         except:
-            await message.edit("<code>Ошибка!</code>")
-    
-    @loader.owner
-    async def b64dcmd(self, message):
-        """.b64d {encoded text} - decode base64"""
-        text = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not text and reply:
-            text = reply.raw_text
-        if not text and not reply:
-            return await utils.answer(message, self.strings("no_text_d", message))
+            await m.edit("<code>Я не могу декодировать это</code>")
+    @loader.sudo
+    async def b64dcmd(self,m):
+        """.b64d [reply or text]"""
         try:
-            enc_bytes = bytes(text, "utf-8")
-            dec_bytes = base64.b64decode(enc_bytes)
-            decoded = bytes.decode(dec_bytes)
-            await message.edit(decoded)
+            text = utils.get_args_raw(m)
+            reply = await m.get_reply_message()
+            if not text:
+                if reply:
+                    text = reply.raw_text
+                else:
+                    return await utils.answer(m, self.strings(no_text_e, m))
+            await m.edit(base64.b64decode(text.encode()).decode())
         except:
-            await message.edit("<code>Я не могу декодировать это.</code>")
-
-    @loader.owner
-    async def b64ecmd(self, message):
-        """.b64e {text} - encode to base64"""
-        text = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not text and reply:
-            text = reply.raw_text
-        if not text and not reply:
-            return await utils.answer(message, self.strings("no_text_e", message))
+            await m.edit("<code>Я не могу декодировать это</code>")
+    @loader.sudo
+    async def b85dcmd(self,m):
+        """.b85d [reply or text]"""
         try:
-            dec_bytes = bytes(text, "utf-8")
-            enc_bytes = base64.b64encode(dec_bytes)
-            encoded = bytes.decode(enc_bytes)
-            await message.edit(encoded)
+            text = utils.get_args_raw(m)
+            reply = await m.get_reply_message()
+            if not text:
+                if reply:
+                    text = reply.raw_text
+                else:
+                    return await utils.answer(m, self.strings(no_text_e, m))
+            await m.edit(base64.b85decode(text.encode()).decode())
         except:
-            await message.edit("<code>Ошибка!</code>")
-        
-    @loader.owner
-    async def b32dcmd(self, message):
-        """.b32d {encoded text} - decode base32"""
-        text = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not text and reply:
-            text = reply.raw_text
-        if not text and not reply:
-            return await utils.answer(message, self.strings("no_text_d", message))
-        try:
-            enc_bytes = bytes(text, "utf-8")
-            dec_bytes = base64.b32decode(enc_bytes)
-            decoded = bytes.decode(dec_bytes)
-            await message.edit(decoded)
-        except:
-            await message.edit("<code>Я не могу декодировать это.</code>")
-
-    @loader.owner
-    async def b32ecmd(self, message):
-        """.b32e {text} - encode to base32"""
-        text = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not text and reply:
-            text = reply.raw_text
-        if not text and not reply:
-            return await utils.answer(message, self.strings("no_text_e", message))
-        try:
-            dec_bytes = bytes(text, "utf-8")
-            enc_bytes = base64.b32encode(dec_bytes)
-            encoded = bytes.decode(enc_bytes)
-            await message.edit(encoded)
-        except:
-            await message.edit("<code>Ошибка!</code>")
-        
-    @loader.owner
-    async def b16dcmd(self, message):
-
-        """.b16d {encoded text} - decode base16"""
-        text = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not text and reply:
-            text = reply.raw_text
-        if not text and not reply:
-        	return await utils.answer(message, self.strings("no_text_d", message))
-        try:
-            enc_bytes = bytes(text, "utf-8")
-            dec_bytes = base64.b16decode(enc_bytes)
-            decoded = bytes.decode(dec_bytes)
-            await message.edit(decoded)
-        except:
-            await message.edit("<code>Я не могу декодировать это.</code>")
-    
-    @loader.owner
-    async def b16ecmd(self, message):
-        """.b16e {text} - encode to base16"""
-        text = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not text and reply:
-        	text = reply.raw_text
-        if not text and not reply:
-        	return await utils.answer(message, self.strings("no_text_e", message))
-        try:
-            dec_bytes = bytes(text, "utf-8")
-            enc_bytes = base64.b16encode(dec_bytes)
-            encoded = bytes.decode(enc_bytes)
-            await message.edit(encoded)
-        except:
-            await message.edit("<code>Ошибка!</code>")
+            await m.edit("<code>Я не могу декодировать это</code>")
