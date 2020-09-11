@@ -37,7 +37,7 @@ class BinaryMod(loader.Module):
         reply = await message.get_reply_message()
         text = utils.get_args_raw(message)
         
-        if reply:
+        if reply and not text:
             text = reply.raw_text
         if not text:
             return await utils.answer(message, "<code>Вы не ввели текст.</code>")
@@ -50,7 +50,7 @@ class BinaryMod(loader.Module):
         reply = await message.get_reply_message()
         text = utils.get_args_raw(message)
         
-        if reply:
+        if reply and not text:
             text = reply.raw_text
         if not text:
             return await utils.answer(message, "<code>Вы не ввели текст.</code>")
