@@ -53,7 +53,7 @@ ID: {user.id}
 Удален: {user.deleted}
 Бот: {user.bot}
 
-DC ID: {user.photo.dc_id}
+DC ID: {user.photo.dc_id if user.photo else None}
 
 Общих чатов: {u.common_chats_count}
 Перманентная ссылка: <a href="tg://user?id={n.from_id}">тык</a>
