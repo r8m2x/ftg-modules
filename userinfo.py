@@ -45,7 +45,6 @@ class UserInfoMod(loader.Module):
 ID: {user.id}
 Юзернейм: {user.username}
 
-Цвет ника: {getColor(user.id)}
 Имя: {user.first_name}
 Фамилия: {user.last_name}
 Био: {u.about}
@@ -61,12 +60,3 @@ DC ID: {user.photo.dc_id}
 
 """)
     
-def getColor(id) -> str:
- colors = ["#FB6169", "#85DE85",
-     "#F3BC5X", "#65BDF3",
-     "#B48BF2", "#FF5694",
-     "#62D4E3", "#FAA357"]
- pos = [0, 7, 4, 1, 6, 3, 5][id % 7]
- color = colors[pos]
- return color
-        
