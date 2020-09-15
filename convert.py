@@ -14,13 +14,14 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# requires: pydub
+#   https://github.com/virtual-fox
 
 import asyncio
 import logging
 import io
-from pydub import AudioSegment as AS
-from telethon import types
+import os
+
+from moviepy.editor import VideoFileClip
 
 from .. import loader, utils
 
@@ -29,48 +30,79 @@ logger = logging.getLogger(__name__)
 
 @loader.tds
 class ConvertMod(loader.Module):
-    """Конвертирование аудио в: mp3, войс; конвертирование стикера, jpg, и др. в png"""
+    """Just convert to voice, mp3 and png."""
     strings = {
-        "name": "convert"
-    }
+                "name": "convert",
+                "no_reply": "<code>",
+                "not_media": "<code>"
+              }
     
     async def client_ready(self, client, db):
         self.client = client
-    
+
     @loader.unrestricted
     async def mp3cmd(self, message):
-        """Конвертация в mp3."""
-        try:
-            await message.edit("<code>Обработка..</code>")
-            reply = await message.get_reply_message()
-            rf = io.BytesIO(await self.client.download_file(reply, bytes))
-            rf.seek(0)
-            m = io.BytesIO()
-            m.name="out.mp3"
-            audio = AS.from_file(rf)
-            audio.split_to_mono()
-            audio.export(m, format="mp3")
-            m.seek(0)
-            await self.client.send_file(message.to_id, m, attributes=[types.DocumentAttributeAudio(duration=reply.media.document.attributes[0].duration, voice=False, title="Converted", performer="@r8m2x_modules", waveform=None),types.DocumentAttributeFilename(file_name="output.mp3")], reply_to=reply)
-            await message.delete()
-        except:
-            await utils.answer(message, "<code>Произошла ошибка. Верятно то что вы хотели конвертировать - не аудиофайл.</code>")
-   
+        """.mp3 [reply] - convert to mp3"""
+        
+        reply = await message.get_reply_message()
+        
+        if not reply:
+            return await utils.answer(message, self.strings("no_reply", message))
+        if not reply.media:
+            return await utils.answer(message, self.strings("not_media", message))
+        
+        await message.edit("<code>Processing...</code>")
+        
+        if reply.video:
+            await self.client.download_file(reply, "in.mp4")
+            video = VideoFileClip("in.mp4")
+            video.audio.write_audiofile("out.mp3")
+            await self.client.send_file(message.to_id, "out.mp3")
+            os.remove("out.mp3")
+            os.remove("in.mp4")
+        else:
+            m = io.BytesIO(await client.download_file(reply));m.name = "out.mp3";m.seek(0)
+            await client.send_file(message.to_id, m)
+        await message.delete()
+    
     @loader.unrestricted
     async def voicecmd(self, message):
-        """Конвертация в войс."""
-        try:
-            reply = await message.get_reply_message()
-            await message.edit("<code>Обработка...</code>")
-            rf = io.BytesIO(await self.client.download_file(reply, bytes))
-            rf.seek(0)
-            m = io.BytesIO()
-            m.name="out.ogg"
-            audio = AS.from_file(rf)
-            audio.split_to_mono()
-            audio.export(m, format="ogg", bitrate="64k", codec="libopus")
-            m.seek(0)
-            await self.client.send_file(message.to_id, m, voice_note=True, reply_to=reply)
-            await message.delete()
-        except:
-            await utils.answer(message, "<code>Произошла ошибка. Верятно то что вы хотели конвертировать - не аудиофайл.</code>")
+        """.voice [reply] - convert to voice"""
+        
+        reply = await message.get_reply_message()
+        
+        if not reply:
+            return await utils.answer(message, self.strings("no_reply", message))
+        if not reply.media:
+            return await utils.answer(message, self.strings("not_media", message))
+        
+        await message.edit("<code>Processing...</code>")
+        
+        if reply.video:
+            await self.client.download_file(reply, "in.mp4")
+            video = VideoFileClip("in.mp4")
+            video.audio.write_audiofile("out.ogg")
+            await self.client.send_file(message.to_id, "out.ogg", reply_to=reply,voice_note=True)
+            os.remove("out.ogg")
+            os.remove("in.mp4")
+        else:
+            m = io.BytesIO(await self.client.download_file(reply));m.name="out.ogg";m.seek(0)
+            await self.client.send_file(message.to_id, m, reply_to=reply, voice_note=True)
+        await message.delete()
+    
+    @loader.unrestricted
+    async def pngcmd(self, message):
+        """.png [reply] - convert to png"""
+        
+        reply = await message.get_reply_message()
+        
+        if not reply:
+            return await utils.answer(message, self.strings("no_reply", message))
+        if not reply.media:
+            return await utils.answer(message, self.strings("not_media", message))
+        
+        m = io.BytesIO(await self.client.download_file(reply));m.name="out.png";m.seek(0)
+        await self.client.send_file(message.to_id, m, reply_to=reply, force_document=True)
+       
+            
+    
