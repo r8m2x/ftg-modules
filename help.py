@@ -33,8 +33,8 @@ class HelpMod(loader.Module):
                "all_header": ("<b>Помощь для</b> <a href='https://t.me/friendlytgbot'>Friendly-Telegram</a>\n"
                               "Чтобы узнать больше информации о модуле напишите <code>{}help &lt;[название модуля]&gt;</code>\n\n"
                               "<b>Список доступных модулей:</b>"),
-               "mod_tmpl": "\n- <b>{}</b>",
-               "first_cmd_tmpl": " • <code>{}",
+               "mod_tmpl": "\n> <b>{}</b>",
+               "first_cmd_tmpl": "  × <code>{}",
                "cmd_tmpl": " | {}",
                "footer": ("\n\nВы можете <b>прочитать больше</b> о многих модулях "
                           "<a href='https://friendly-telegram.gitlab.io'>тут</a>.")
@@ -87,7 +87,7 @@ class HelpMod(loader.Module):
                         first = False
                     else:
                         reply += self.strings("cmd_tmpl", message).format(cmd)
-                reply += "</code> •"
+                reply += "</code> ×"
         reply += self.strings("footer", message)
         await utils.answer(message, reply)
 
