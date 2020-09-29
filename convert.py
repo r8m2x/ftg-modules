@@ -16,6 +16,8 @@
 
 #   https://github.com/virtual-fox
 
+# required
+
 import asyncio
 import logging
 import io
@@ -61,8 +63,8 @@ class ConvertMod(loader.Module):
             os.remove("out.mp3")
             os.remove("in.mp4")
         else:
-            m = io.BytesIO(await client.download_file(reply));m.name = "out.mp3";m.seek(0)
-            await client.send_file(message.to_id, m)
+            m = io.BytesIO(await self.client.download_file(reply));m.name = "out.mp3";m.seek(0)
+            await self.client.send_file(message.to_id, m)
         await message.delete()
     
     @loader.unrestricted
