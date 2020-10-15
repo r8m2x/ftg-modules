@@ -1,0 +1,8 @@
+base_ed
+binary
+calc 
+convert
+help
+bssid
+neofetch
+userinfo
